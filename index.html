@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory</title>
+</head>
+<body>
+    <h1>Inventory List</h1>
+    <form method="POST" action="/create">
+        <input name="name" placeholder="Item name" required>
+        <input name="quantity" type="number" placeholder="Quantity" required>
+        <button type="submit">Add Item</button>
+    </form>
+
+    <ul>
+        {% for item in items %}
+        <li>
+            {{ item[1] }} ({{ item[2] }})
+            <form method="POST" action="/update/{{ item[0] }}" style="display:inline;">
+                <input name="quantity" type="number" value="{{ item[2] }}">
+                <button type="submit">Update</button>
+            </form>
+            <a href="/delete/{{ item[0] }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
